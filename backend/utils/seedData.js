@@ -49,8 +49,9 @@ const seedData = async () => {
 
     // Create university users
     const universityUsers = [];
-    for (const uni of universities.slice(0, 4)) {
-      const slug = uni.name.toLowerCase().replace(/\s+/g, '').slice(0, 10);
+    for (let idx = 0; idx < Math.min(4, universities.length); idx++) {
+      const uni = universities[idx];
+      const slug = uni.name.toLowerCase().replace(/[^a-z0-9]/g, '').slice(0, 10) + idx;
       const user = await User.create({
         name: `${uni.name} Admin`,
         email: `${slug}@university.edu`,
@@ -203,7 +204,7 @@ const seedData = async () => {
     console.log('\nLogin Credentials:');
     console.log('─────────────────');
     console.log('Admin:      admin@gov.in / Admin@123!');
-    console.log('University: indianinst@university.edu / University@123!');
+    console.log('University: indianinst0@university.edu / University@123!');
     console.log('Student:    student1@student.edu / Student@123!');
     console.log('========================================\n');
 
